@@ -22,3 +22,5 @@ SELECT
         WHEN (a <> b) AND (b <> c) AND (c <> a) THEN 'Scalene' 
     END tuple
 FROM TRIANGLES;
+
+/* TO BE CONTINUE */
