@@ -73,4 +73,28 @@ PIVOT
     (MAX(name) FOR [occupation] IN ([Doctor], [Professor], [Singer], [Actor])) as pvt
 ORDER by rn
 
+/*
+Binary Tree Nodes
+You are given a table, BST, containing two columns: N and P, where N represents the value of a node in Binary Tree, and P is the parent of N.
+Write a query to find the node type of Binary Tree ordered by the value of the node. Output one of the following for each node:
+Root: If node is root node.
+Leaf: If node is leaf node.
+Inner: If node is neither root nor leaf node.
+*/
+
+SELECT b.N,
+    -- b is a subsquery
+    -- Use Case when there are conditions to go through, close with End
+    (CASE 
+        -- when there is no parent
+        WHEN b.P IS NULL THEN 'Root' 
+        -- at least one node has this node as parent
+        -- the select 1 is the 1st column
+        WHEN EXISTS (SELECT 1 FROM BST b2 WHERE b2.P = b.N) THEN 'Inner'
+        -- not a parent and no nodes have this have this as a parent
+        ELSE 'Leaf'
+     END)
+FROM BST b
+ORDER BY N;
+
 /* TO BE CONTINUE */
